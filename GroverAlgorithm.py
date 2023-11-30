@@ -65,8 +65,8 @@ if __name__ == "__main__": # Main function to run the Grover algorithm on the si
 
     marked_states = ["11"] # List of bit-strings to mark
     
-    θ = np.sqrt(len(marked_states) / 2**len(qreg_q)) # Calculate the amplitude of the marked states
-    R = round(np.arccos(θ) / (2 * np.arcsin(θ))) # Calculate the number of iterations to apply the Grover operator for optimal performance
+    θ = np.sqrt(len(marked_states) / 2**len(qreg_q), dtype=np.float32) # Calculate the amplitude of the marked states
+    R = round((np.arccos(θ)) / (2 * np.arcsin(θ))) # Calculate the number of iterations to apply the Grover operator for optimal performance
 
     for i in range(len(qreg_q)): # Apply Hadamard gates to all qubits
         circuit.h(qreg_q[i])
