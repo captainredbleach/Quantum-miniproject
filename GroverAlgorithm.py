@@ -14,14 +14,14 @@ def Oracle(marked_states): # Oracle function to mark the target bit-strings
     for target in marked_states: 
         
         rev_target = target[::-1] 
-        zero_inds = [ind for ind in range(len(max(marked_states))) if rev_target.startswith("0", ind)] # Find the indices of the |0> states in the target bit-string
+        zero_inds = [ind for ind in range(len(target)) if rev_target.startswith("0", ind)] # Find the indices of the |0> states in the target bit-string
         
         # Add a multi-controlled Z-gate with pre- and post-applied X-gates (open-controls) to the circuit if the target qubit is in the |0> state
         
         if zero_inds:
             circuit.x(zero_inds)
         
-        circuit.compose(MCMT(ZGate(), len(max(marked_states)) - 1, 1), inplace=True) # Apply the multi-controlled Z-gate with the target qubit as the control and all other qubits as targets 
+        circuit.compose(MCMT(ZGate(), len(target) - 1, 1), inplace=True) # Apply the multi-controlled Z-gate with the target qubit as the control and all other qubits as targets 
         
         if zero_inds:
             circuit.x(zero_inds)
